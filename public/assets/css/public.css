@@ -1,0 +1,8 @@
+/* This stylesheet is used to style the public-facing components of the plugin. */
+.wdm_isDisabled {
+  color: grey;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+  pointer-events: none;
+}
