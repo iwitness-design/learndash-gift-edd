@@ -19,7 +19,7 @@
 	<div class = "buy_as_gift_checkbox_div">
 		<p>
 			<input type = "checkbox" class="buy_as_gift_checkbox" name = "buy_as_gift_checkbox" value = "on" style="cursor:pointer;" title="Enable to purchase as a gift">
-			<label class="wdm_label buy_as_gift_checkbox_label textinput"><?php echo apply_filters( 'edd_ld_buy_as_gift_info_text', $gift_label ); ?></label>
+			<label class="wdm_label buy_as_gift_checkbox_label textinput"><?php echo wp_kses_post( apply_filters( 'edd_ld_buy_as_gift_info_text', $gift_label ) ); ?></label>
 		</p>
 	</div>
 	<div class = "buy_as_gift_section" style="display:none">
