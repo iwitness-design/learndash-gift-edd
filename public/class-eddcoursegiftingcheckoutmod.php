@@ -37,7 +37,7 @@ class EddCourseGiftingCheckoutMod {
 	 * @since     1.0.0
 	 */
 	public function __construct() {
-		add_action( 'edd_checkout_form_top', array( $this, 'render_buy_as_gift_html' ), 10 );
+		add_action( 'edd_checkout_form_top', array( $this, 'render_buy_as_gift_html' ), 5 );
 		add_action( 'edd_payment_saved', array( $this, 'save_purchaser_gift_data' ), 10, 1 );
 		add_action( 'edd_checkout_error_checks', array( $this, 'purchaser_gift_data_validation' ), 10, 2 );
 	}
