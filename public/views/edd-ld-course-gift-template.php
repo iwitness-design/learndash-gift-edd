@@ -28,16 +28,18 @@
 			<p>
 				<label class="edd-label" for="edd-ld-gift-first-name">
 					<?php esc_html_e( 'First Name', 'learndash-gift-edd' ); ?>
+					<span class="edd-required-indicator">*</span>
 				</label>
 				<span class="edd-description" id="edd-ld-gift-first-name-description"><?php esc_html_e( 'Recipient first name', 'learndash-gift-edd' ); ?></span>
-				<input class="edd-input" type="text" name="edd_ld_gift_first_name" placeholder="<?php esc_html_e( 'First name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-first-name" value="" aria-describedby="edd-email-first-name-description" />
+				<input class="edd-input required" type="text" name="edd_ld_gift_first_name" placeholder="<?php esc_html_e( 'First name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-first-name" value="" aria-describedby="edd-email-first-name-description" />
 			</p>
 			<p>
 				<label class="edd-label" for="edd-ld-gift-last-name">
 					<?php esc_html_e( 'Last Name', 'learndash-gift-edd' ); ?>
+					<span class="edd-required-indicator">*</span>
 				</label>
 				<span class="edd-description" id="edd-ld-gift-last-name-description"><?php esc_html_e( 'Recipient last name', 'learndash-gift-edd' ); ?></span>
-				<input class="edd-input" type="text" name="edd_ld_gift_last_name" placeholder="<?php esc_html_e( 'Last name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-last-name" value="" aria-describedby="edd-email-last-name-description" />
+				<input class="edd-input required" type="text" name="edd_ld_gift_last_name" placeholder="<?php esc_html_e( 'Last name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-last-name" value="" aria-describedby="edd-email-last-name-description" />
 			</p>
 			<p>
 				<label class="edd-label" for="edd-ld-gift-email">
