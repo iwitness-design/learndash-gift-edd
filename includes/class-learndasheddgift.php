@@ -18,6 +18,7 @@
 
 class LearndashEddGift {
 
+
 	/**
 	 * Instance of this class.
 	 *
@@ -232,7 +233,7 @@ class LearndashEddGift {
 
 	public function plugin_activation_handler() {
 		if ( ! wp_next_scheduled( 'emails_gift_reminder' ) ) {
-			$date = gmdate( 'Y-m-d' );
+			$date         = gmdate( 'Y-m-d' );
 			$current_time = strtotime( $date . ' 07:00:00' );
 			if ( $current_time > time() ) {
 				wp_schedule_event( $current_time, 'wdm_daily_emails_gift_reminder', 'emails_gift_reminder' );
@@ -260,8 +261,8 @@ class LearndashEddGift {
 	 *
 	 */
 	private function set_dependencies_plugin_activation_status() {
-		self::$edd_active_status = $this->wdm_check_plugin_activation_status( 'easy-digital-downloads.php' );
-		self::$ld_active_status = $this->wdm_check_plugin_activation_status( 'sfwd_lms.php' );
+		self::$edd_active_status    = $this->wdm_check_plugin_activation_status( 'easy-digital-downloads.php' );
+		self::$ld_active_status     = $this->wdm_check_plugin_activation_status( 'sfwd_lms.php' );
 		self::$edd_ld_active_status = $this->wdm_check_plugin_activation_status( 'learndash-edd.php' );
 	}
 
@@ -274,7 +275,7 @@ class LearndashEddGift {
 
 	public function wdm_dependency_admin_notice() {
 		if ( ! self::$edd_active_status || ! self::$ld_active_status || ! self::$edd_ld_active_status ) {
-			printf( '<div class="error"><p>%s</p></div>', __( 'LearnDash or Easy digital download or LearnDash EDD integration plugin is not active. In order to make Gift LearnDash Courses plugin work, you need to install and activate LearnDash, Easy digital download & LearnDash EDD integration plugin first.', 'learndash-gift-edd' ) );
+			printf( '<div class="error"><p>%s</p></div>', __( 'Learndash or Easy digital download or Learndash EDD integration plugin is not active. In order to make Gift learndash Courses plugin work, you need to install and activate Learndash, Easy digital download & Learndash EDD integration plugin first.', 'learndash-gift-edd' ) );
 		}
 	}
 
@@ -289,7 +290,7 @@ class LearndashEddGift {
 	 */
 	public function wdm_check_plugin_activation_status( $plugin_slug = '' ) {
 
-		foreach( wp_get_active_and_valid_plugins() as $plugin ) {
+		foreach ( wp_get_active_and_valid_plugins() as $plugin ) {
 			if ( strpos( $plugin, $plugin_slug ) ) {
 				return true;
 			}
