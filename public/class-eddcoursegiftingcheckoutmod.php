@@ -37,7 +37,7 @@ class EddCourseGiftingCheckoutMod {
 	 * @since     1.0.0
 	 */
 	public function __construct() {
-		add_action( 'edd_checkout_form_top', array( $this, 'render_buy_as_gift_html' ), 10 );
+		add_action( 'edd_checkout_form_top', array( $this, 'render_buy_as_gift_html' ), 5 );
 		add_action( 'edd_payment_saved', array( $this, 'save_purchaser_gift_data' ), 10, 1 );
 		add_action( 'edd_checkout_error_checks', array( $this, 'purchaser_gift_data_validation' ), 10, 2 );
 	}
@@ -141,15 +141,15 @@ class EddCourseGiftingCheckoutMod {
 		if ( $dbagstatus && $p_a_g_status ) {
 			$settings = get_plugin_setting_data();
 			if ( ! check_isset_and_not_empty( $posted, 'buy_as_gift_status' ) ) {
-				edd_set_error( 'unexpected_error', __( 'Some things went wrong, please try again.', 'learndash-gift-edd' ) );
+				edd_set_error( 'unexpected_error', __( 'Something went wrong, please try again.', 'learndash-gift-edd' ) );
 			}
 			if ( ! check_isset_and_not_empty( $posted, 'edd_ld_gift_email', true ) ) {
-				edd_set_error( 'empty_gift_receiver_email', __( 'Please enter the gift recevier email address', 'learndash-gift-edd' ) );
+				edd_set_error( 'empty_gift_receiver_email', __( 'Please enter the gift receiver email address', 'learndash-gift-edd' ) );
 			}
 			$send_later_status = ( ! empty( $settings['enable_send_later'] ) && 'checked' == $settings['enable_send_later'] ) ? true : false;
 			if ( $send_later_status ) {
 				if ( ! check_isset_and_not_empty( $posted, 'send_later_status' ) ) {
-					edd_set_error( 'unexpected_error', __( 'Some things went wrong, please try again.', 'learndash-gift-edd' ) );
+					edd_set_error( 'unexpected_error', __( 'Something went wrong, please try again.', 'learndash-gift-edd' ) );
 				}
 				if ( ! check_isset_and_not_empty( $posted, 'edd_ld_gift_date' ) ) {
 					edd_set_error( 'empty_gift_course_enrollment_date', __( 'Please set the date for gift course enrollment.', 'learndash-gift-edd' ) );

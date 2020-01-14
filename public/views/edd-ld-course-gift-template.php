@@ -19,7 +19,7 @@
 	<div class = "buy_as_gift_checkbox_div">
 		<p>
 			<input type = "checkbox" class="buy_as_gift_checkbox" name = "buy_as_gift_checkbox" value = "on" style="cursor:pointer;" title="Enable to purchase as a gift">
-			<label class="wdm_label buy_as_gift_checkbox_label textinput"><?php echo apply_filters( 'edd_ld_buy_as_gift_info_text', $gift_label ); ?></label>
+			<label class="wdm_label buy_as_gift_checkbox_label textinput"><?php echo wp_kses_post( apply_filters( 'edd_ld_buy_as_gift_info_text', $gift_label ) ); ?></label>
 		</p>
 	</div>
 	<div class = "buy_as_gift_section" style="display:none">
@@ -46,14 +46,14 @@
 					<?php esc_html_e( 'Email Address', 'learndash-gift-edd' ); ?>
 						<span class="edd-required-indicator">*</span>
 				</label>
-				<span class="edd-description" id="edd-ld-gift-email-description"><?php esc_html_e( 'We will create the user using this email and enroll in the purchased courses.', 'learndash-gift-edd' ); ?></span>
+				<span class="edd-description" id="edd-ld-gift-email-description"><?php esc_html_e( 'A user account will be created with this email address and enrolled in the purchased course(s).', 'learndash-gift-edd' ); ?></span>
 				<input class="edd-input required" type="email" name="edd_ld_gift_email" placeholder="<?php esc_html_e( 'Email address', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-email" value="" aria-describedby="edd-email-description" />
 			</p>
 			<p>
 				<label class="edd-label" for="edd-ld-gift-message">
 					<?php esc_html_e( 'Message', 'learndash-gift-edd' ); ?>
 				</label>
-				<span class="edd-description" id="edd-ld-gift-message-description"><?php esc_html_e( 'This message will included in the gift receiver email', 'learndash-gift-edd' ); ?></span>
+				<span class="edd-description" id="edd-ld-gift-message-description"><?php esc_html_e( 'We\'ll send this message and notify the user of their new account.', 'learndash-gift-edd' ); ?></span>
 				<textarea rows="4" cols="50" name="edd_ld_gift_message" placeholder="Message to gift receiver"></textarea>
 			<p>
 			<?php

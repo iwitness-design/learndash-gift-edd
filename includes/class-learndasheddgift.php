@@ -275,7 +275,7 @@ class LearndashEddGift {
 
 	public function wdm_dependency_admin_notice() {
 		if ( ! self::$edd_active_status || ! self::$ld_active_status || ! self::$edd_ld_active_status ) {
-			printf( '<div class="error"><p>%s</p></div>', __( 'Learndash or Easy digital download or Learndash EDD integration plugin is not active. In order to make Gift learndash Courses plugin work, you need to install and activate Learndash, Easy digital download & Learndash EDD integration plugin first.', 'learndash-gift-edd' ) );
+			printf( '<div class="error"><p>%s</p></div>', __( 'LearnDash or Easy digital download or LearnDash EDD integration plugin is not active. In order to make Gift LearnDash Courses plugin work, you need to install and activate LearnDash, Easy digital download & LearnDash EDD integration plugin first.', 'learndash-gift-edd' ) );
 		}
 	}
 
