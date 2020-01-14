@@ -57,6 +57,7 @@ class LearndashEddGiftSettings {
 	public static function display_admin_page() {
 		include_once( LEARNDASH_EDD_GIFT_PLUGIN_PATH . '/admin/views/admin.php' );
 	}
+
 	public function before_saving_the_gift_data( $new_data ) {
 		if ( isset( $new_data['learndash_edd_gift_email_subject'] ) ) {
 			$new_data['learndash_edd_gift_email_subject'] = sanitize_text_field( $new_data['learndash_edd_gift_email_subject'] );
@@ -66,6 +67,7 @@ class LearndashEddGiftSettings {
 		}
 		return $new_data;
 	}
+
 	public static function get_notification_email( $type ) {
 		$value = '';
 		if ( empty( self::$plugin_s_option ) ) {
