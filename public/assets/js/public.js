@@ -1,6 +1,4 @@
-(
-  function ($) {
-
+(function ( $ ) {
     $(document).ready(function () {
       $('.edd_ld_gift_date').datepicker({
         minDate   : 0,
@@ -28,6 +26,4 @@
         }
       });
     });
-
-  }(jQuery)
-);
+}(jQuery));

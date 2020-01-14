@@ -48,7 +48,7 @@ class LearndashEddGiftSettings {
 	 * @return    object    A single instance of this class.
 	 */
 	public static function get_instance() {
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new self;
 		}
 
@@ -72,6 +72,7 @@ class LearndashEddGiftSettings {
 		$value = '';
 		if ( empty( self::$plugin_s_option ) ) {
 			$plugin_s_option = get_plugin_setting_data();
+
 			self::$plugin_s_option = is_array( $plugin_s_option ) ? $plugin_s_option : array();
 		}
 		$value = isset( self::$plugin_s_option[ $type ] ) ? self::$plugin_s_option[ $type ] : '';

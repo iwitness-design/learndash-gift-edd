@@ -31,11 +31,14 @@ e.g.
 
 == Changelog ==
 
+= 1.1.0 =
+Added data sanitization for "email subject" and "buy as a gift" button text in the admin settings.
+Added first and last name required validations in the EDD checkout page.
+
 = 1.0 =
 Initial plugin.
 
 == Arbitrary section ==
 
 You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
+plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or "installation."  Arbitrary sections will be shown below the built-in sections outlined above.
