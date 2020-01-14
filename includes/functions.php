@@ -48,24 +48,27 @@ if ( ! function_exists( 'check_isset_and_not_empty' ) ) {
 	}
 }
 if ( ! function_exists( 'get_gift_receiver_user_id' ) ) {
-	function get_gift_receiver_user_id( $customer_email, $customer_first_name = '', $customer_last_name = '' ) {
+	function get_gift_receiver_user_id( $customer_email, $customer_first_name = '', $customer_last_name = '', $remove = false ) {
+		$user_id = 0;
 		$exists = email_exists( $customer_email );
 		if ( $exists ) {
 			update_user_meta( $exists, 'edd_gift_first_name', $customer_first_name );
 			update_user_meta( $exists, 'edd_gift_firstlast_name', $customer_last_name );
 			return $exists;
 		}
-		$user_name = $customer_email;
-		if ( username_exists( $customer_email ) ) {
-			$user_name = $customer_email . wp_generate_password( 4, false );
-		}
+		if ( ! $remove ) {
+			$user_name = $customer_email;
+			if ( username_exists( $customer_email ) ) {
+				$user_name = $customer_email . wp_generate_password( 4, false );
+			}
 
-		$random_password = wp_generate_password( 12, false );
-		$user_id = wp_create_user( $user_name, $random_password, $customer_email );
-		update_user_meta( $user_id, 'edd_gift_first_name', $customer_first_name );
-		update_user_meta( $user_id, 'edd_gift_last_name', $customer_last_name );
-		update_user_meta( $user_id, 'first_name', $customer_first_name );
-		update_user_meta( $user_id, 'last_name', $customer_last_name );
+			$random_password = wp_generate_password( 12, false );
+			$user_id = wp_create_user( $user_name, $random_password, $customer_email );
+			update_user_meta( $user_id, 'edd_gift_first_name', $customer_first_name );
+			update_user_meta( $user_id, 'edd_gift_last_name', $customer_last_name );
+			update_user_meta( $user_id, 'first_name', $customer_first_name );
+			update_user_meta( $user_id, 'last_name', $customer_last_name );
+		}
 		return $user_id;
 	}
 }

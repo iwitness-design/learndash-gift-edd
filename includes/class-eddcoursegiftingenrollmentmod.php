@@ -20,6 +20,19 @@
 
 class EddCourseGiftingEnrollmentMod {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * Instance of this class.
 	 *
@@ -143,12 +156,11 @@ class EddCourseGiftingEnrollmentMod {
 					//send_gift_email($customer_id, $remove, $enroll_courses_array);
 				}
 				if ( $buy_as_gift_status && ! empty( $customer_email ) ) {
-
 					if ( $send_later_status && ! $remove ) {
 						$edd_ld_gift_date = get_post_meta( $transaction_id, 'edd_ld_gift_date', true );
 						$c_u_e_status = $this->current_user_enrollment_status( $transaction_id, $edd_ld_gift_date, $customer_email, $courses, $customer_user_id );
 						if ( $c_u_e_status ) {
-							$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name );
+							$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name, $remove );
 							foreach ( $courses as $course_id ) {
 								ld_update_course_access( (int) $customer_id, (int) $course_id, $remove );
 								$gifted_courses_array[ $course_id ] = $course_id;
@@ -156,7 +168,7 @@ class EddCourseGiftingEnrollmentMod {
 							send_gift_email( $customer_user_id, $customer_id, $remove, $b_a_g_message, $gifted_courses_array );
 						}
 					} else {
-						$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name );
+						$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name, $remove );
 						foreach ( $courses as $course_id ) {
 							ld_update_course_access( (int) $customer_id, (int) $course_id, $remove );
 							$gifted_courses_array[ $course_id ] = $course_id;
@@ -178,7 +190,6 @@ class EddCourseGiftingEnrollmentMod {
 				 && ( ! empty( $edd_payment_meta['downloads'] ) ) ) {
 			foreach ( $edd_payment_meta['downloads'] as $download ) {
 				if ( isset( $download['id'] ) ) {
-
 					$download_id = intval( $download['id'] );
 					if ( ! empty( $download_id ) ) {
 						// Get the Courses

@@ -19,6 +19,9 @@
 class LearndashEddGift {
 
 
+
+
+
 	/**
 	 * Instance of this class.
 	 *
@@ -241,6 +244,11 @@ class LearndashEddGift {
 				wp_schedule_event( strtotime( '+1 day', $current_time ), 'wdm_daily_emails_gift_reminder', 'emails_gift_reminder' );
 			}
 		}
+		if ( ! wp_next_scheduled( 'gift_emails_handler' ) ) {
+			$date = gmdate( 'Y-m-d' );
+			$current_time = strtotime( $date . ' 07:00:00' );
+			wp_schedule_event( $current_time, 'wdm_gift_emails_handler', 'gift_emails_handler' );
+		}
 	}
 
 	/**
@@ -252,6 +260,7 @@ class LearndashEddGift {
 
 	public function plugin_deactivation_handler() {
 		wp_clear_scheduled_hook( 'emails_gift_reminder' );
+		wp_clear_scheduled_hook( 'gift_emails_handler' );
 	}
 
 	/**
@@ -284,6 +293,7 @@ class LearndashEddGift {
 	 *
 	 * @since     1.0.0
 	 *
+	 * @param string $plugin_dir_name plugin directoery name
 	 * @param string $plugin_slug plugin main file name
 	 *
 	 * @return    boolean.
@@ -297,6 +307,5 @@ class LearndashEddGift {
 		}
 
 		return false;
-
 	}
 }
