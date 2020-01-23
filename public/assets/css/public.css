@@ -6,3 +6,6 @@
   text-decoration: none;
   pointer-events: none;
 }
+input#edd-ld-gift-date {
+	cursor: pointer;
+}
