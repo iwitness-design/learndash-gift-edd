@@ -59,7 +59,7 @@ class EddCourseGiftingCheckoutMod {
 		return self::$instance;
 	}
 	/**
-	 * Function to render the gift frontend view.
+	 * Funtion to render the gift frontend view.
 	 *
 	 * @since     1.0.0
 	 *

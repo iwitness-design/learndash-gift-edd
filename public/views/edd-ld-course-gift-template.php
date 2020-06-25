@@ -27,19 +27,10 @@
 		<p id="edd-ld-gift-email-wrap">
 			<p>
 				<label class="edd-label" for="edd-ld-gift-first-name">
-					<?php esc_html_e( 'First Name', 'learndash-gift-edd' ); ?>
-					<span class="edd-required-indicator">*</span>
+					<?php esc_html_e( 'Gift to:', 'learndash-gift-edd' ); ?>
 				</label>
-				<span class="edd-description" id="edd-ld-gift-first-name-description"><?php esc_html_e( 'Recipient first name', 'learndash-gift-edd' ); ?></span>
-				<input class="edd-input required" type="text" name="edd_ld_gift_first_name" placeholder="<?php esc_html_e( 'First name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-first-name" value="" aria-describedby="edd-email-first-name-description" />
-			</p>
-			<p>
-				<label class="edd-label" for="edd-ld-gift-last-name">
-					<?php esc_html_e( 'Last Name', 'learndash-gift-edd' ); ?>
-					<span class="edd-required-indicator">*</span>
-				</label>
-				<span class="edd-description" id="edd-ld-gift-last-name-description"><?php esc_html_e( 'Recipient last name', 'learndash-gift-edd' ); ?></span>
-				<input class="edd-input required" type="text" name="edd_ld_gift_last_name" placeholder="<?php esc_html_e( 'Last name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-last-name" value="" aria-describedby="edd-email-last-name-description" />
+				<input class="edd-input" type="text" name="edd_ld_gift_first_name" placeholder="<?php esc_html_e( 'Student First name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-first-name" value="" aria-describedby="edd-email-first-name-description" />
+								<input class="edd-input" type="text" name="edd_ld_gift_last_name" placeholder="<?php esc_html_e( 'Student Last name', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-last-name" value="" aria-describedby="edd-email-last-name-description" />
 			</p>
 			<p>
 				<label class="edd-label" for="edd-ld-gift-email">
@@ -47,14 +38,13 @@
 						<span class="edd-required-indicator">*</span>
 				</label>
 				<span class="edd-description" id="edd-ld-gift-email-description"><?php esc_html_e( 'A user account will be created with this email address and enrolled in the purchased course(s).', 'learndash-gift-edd' ); ?></span>
-				<input class="edd-input required" type="email" name="edd_ld_gift_email" placeholder="<?php esc_html_e( 'Email address', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-email" value="" aria-describedby="edd-email-description" />
+				<input class="edd-input required" type="email" name="edd_ld_gift_email" placeholder="<?php esc_html_e( 'Student Email address', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-email" value="" aria-describedby="edd-email-description" />
 			</p>
 			<p>
 				<label class="edd-label" for="edd-ld-gift-message">
-					<?php esc_html_e( 'Message', 'learndash-gift-edd' ); ?>
+					<?php esc_html_e( 'Your Message', 'learndash-gift-edd' ); ?>
 				</label>
-				<span class="edd-description" id="edd-ld-gift-message-description"><?php esc_html_e( 'We\'ll send this message and notify the user of their new account.', 'learndash-gift-edd' ); ?></span>
-				<textarea rows="4" cols="50" name="edd_ld_gift_message" placeholder="Message to gift receiver"></textarea>
+								<textarea rows="4" cols="50" name="edd_ld_gift_message" placeholder="Message to student (optional)"></textarea>
 			<p>
 			<?php
 			if ( $send_later_status ) {
