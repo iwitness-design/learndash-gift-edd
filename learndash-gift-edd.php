@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       Gift LearnDash Courses
  * Description:       Gift LearnDash courses using EDD platform. Required LearnDash, EDD, and LearnDash EDD Integration.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Bloop Animation Studios
  * Text Domain:       learndash-gift-edd
  * License:           GPL-2.0+

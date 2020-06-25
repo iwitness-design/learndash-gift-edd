@@ -56,6 +56,9 @@ class EddCourseGiftingEnrollmentMod {
 		add_action( 'edd_complete_purchase', array( $this, 'complete_purchase' ) );
 		add_action( 'edd_recurring_update_subscription', array( $this, 'update_subscription' ), 10, 3 );
 
+		// ConvertKit support
+		add_action( 'edd_pre_complete_purchase', array( $this, 'skip_convertkit' ) );
+
 		// Remove courses
 		add_action( 'edd_subscription_cancelled', array( $this, 'cancel_subscription' ), 10, 2 );
 		add_action( 'edd_subscription_expired', array( $this, 'cancel_subscription' ), 10, 2 );
@@ -116,6 +119,31 @@ class EddCourseGiftingEnrollmentMod {
 	 */
 	public function complete_purchase( $payment_id ) {
 		$this->update_course_access( $payment_id );
+	}
+
+	/**
+	 * Prevent sending the buyer to ConvertKit when purchasing as gift
+	 *
+	 * @param $payment_id
+	 *
+	 * @since  1.1.1
+	 *
+	 * @author Tanner Moushey
+	 */
+	public function skip_convertkit( $payment_id ) {
+		global $edd_convert_kit;
+
+		// make sure that ConvertKit is active
+		if ( empty( $edd_convert_kit ) ) {
+			return;
+		}
+
+		// is this purchase a gift?
+		if ( ! get_post_meta( $payment_id, 'buy_as_gift_status', true ) ) {
+			return;
+		}
+
+		remove_action( 'edd_complete_download_purchase', array( $edd_convert_kit, 'completed_download_purchase_signup' ), 10 );
 	}
 
 	/**

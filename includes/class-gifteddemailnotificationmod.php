@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Gift learndash Courses.
+ * Gift LearnDash Courses.
  *
  * @package   learndash-gift-edd
  * @author    WisdmLabs <wisdmlabs@info.com>
@@ -11,7 +11,7 @@
  */
 
 /**
- * Class to later the email notification functionlaity
+ * Class to later the email notification functionality
  *
  * @package learndash-gift-edd/include/
  * @author    WisdmLabs <wisdmlabs@info.com>

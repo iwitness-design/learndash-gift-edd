@@ -31,6 +31,9 @@ e.g.
 
 == Changelog ==
 
+= 1.1.1 =
+Do not add purchaser to ConvertKit when purchasing as gift.
+
 = 1.1.0 =
 Added data sanitization for "email subject" and "buy as a gift" button text in the admin settings.
 Added first and last name required validations in the EDD checkout page.
