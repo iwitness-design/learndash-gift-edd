@@ -20,6 +20,27 @@
 	<form method="post" action="options.php">
 		<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 		<?php settings_fields( 'learndash_edd_gift_options' ); ?>
+        <table class="form-table">
+            <tr>
+                <th>
+                    <label for="rcpbp_license_key"><?php _e( 'License Key', 'rcpbp' ); ?></label>
+                </th>
+                <td>
+                    <p><input class="regular-text" type="text" id="rcpbp_license_key"
+                              name="rcpbp_license_key" value="<?php echo esc_attr( $license ); ?>"/>
+						<?php if ( $status == 'valid' ) : ?>
+							<?php wp_nonce_field( 'rcpbp_deactivate_license', 'rcpbp_deactivate_license' ); ?>
+							<?php submit_button( 'Deactivate License', 'secondary', 'rcpbp_license_deactivate', false ); ?>
+                            <span style="color:green">&nbsp;&nbsp;<?php _e( 'active', 'rcpbp' ); ?></span>
+						<?php elseif ( $license ) : ?>
+							<?php submit_button( 'Activate License', 'secondary', 'rcpbp_license_activate', false ); ?>
+						<?php endif; ?></p>
+
+                    <p class="description"><?php printf( __( 'Enter your LearDash EDD Gift license key. This is required for automatic updates and <a href="%s">support</a>.', 'rcpbp' ), 'https://skillfulplugins.com/contact/' ); ?></p>
+                </td>
+            </tr>
+
+        </table>
 		<div class = "wdm-learndash-gift-edd-email-settings">
 			<br>
 			<i>

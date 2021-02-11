@@ -17,6 +17,11 @@
  * Domain Path:       /languages
  */
 
+/* EDD Licensing constants */
+define( 'LGE_STORE_URL', 'https://skillfulplugins.com' );
+define( 'LGE_ITEM_ID', 5576 );
+define( 'LGE_SETTINGS_PAGE', 'learndash-gift-edd' );
+
 /**
  *If this file is called directly, abort.
  */
@@ -59,3 +64,5 @@ function learndash_edd_gift_class_instance() {
 
 // Global for backwards compatibility.
 $GLOBALS['LearndashEddGift'] = learndash_edd_gift_class_instance();
+
+
