@@ -23,7 +23,7 @@
         <table class="form-table">
             <tr>
                 <th>
-                    <label for="rcpbp_license_key"><?php _e( 'License Key', 'rcpbp' ); ?></label>
+                    <label for="rcpbp_license_key"><?php _e( 'License Key', 'learndash-gift-edd' ); ?></label>
                 </th>
                 <td>
                     <p><input class="regular-text" type="text" id="rcpbp_license_key"
@@ -31,12 +31,12 @@
 						<?php if ( $status == 'valid' ) : ?>
 							<?php wp_nonce_field( 'rcpbp_deactivate_license', 'rcpbp_deactivate_license' ); ?>
 							<?php submit_button( 'Deactivate License', 'secondary', 'rcpbp_license_deactivate', false ); ?>
-                            <span style="color:green">&nbsp;&nbsp;<?php _e( 'active', 'rcpbp' ); ?></span>
+                            <span style="color:green">&nbsp;&nbsp;<?php _e( 'active', 'learndash-gift-edd' ); ?></span>
 						<?php elseif ( $license ) : ?>
 							<?php submit_button( 'Activate License', 'secondary', 'rcpbp_license_activate', false ); ?>
 						<?php endif; ?></p>
 
-                    <p class="description"><?php printf( __( 'Enter your LearDash EDD Gift license key. This is required for automatic updates and <a href="%s">support</a>.', 'rcpbp' ), 'https://skillfulplugins.com/contact/' ); ?></p>
+                    <p class="description"><?php printf( __( 'Enter your LearDash EDD Gift license key. This is required for automatic updates and <a href="%s">support</a>.', 'learndash-gift-edd' ), 'https://www.bloopanimation.com/support/' ); ?></p>
                 </td>
             </tr>
 
