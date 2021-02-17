@@ -234,7 +234,7 @@ class EddCourseGiftingEnrollmentMod {
 	}
 
 	public function current_user_enrollment_status( $transaction_id, $edd_ld_gift_date, $customer_email, $courses, $purchaser_user_id ) {
-		$date = DateTime::createFromFormat( 'd-m-Y', $edd_ld_gift_date );
+		$date = DateTime::createFromFormat( 'd-m-Y H:i:s', $edd_ld_gift_date );
 		$elgd_timestamp = $date->getTimestamp();
 		$todays_date = gmdate( 'd-m-Y' );
 		$todays_date_obj = DateTime::createFromFormat( 'd-m-Y', $todays_date );

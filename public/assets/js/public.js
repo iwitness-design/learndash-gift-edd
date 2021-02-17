@@ -1,10 +1,11 @@
 (function ( $ ) {
     $(document).ready(function () {
-      $('.edd_ld_gift_date').datepicker({
+      $('.edd_ld_gift_date').datetimepicker({
         minDate   : 0,
-        dateFormat: 'dd-mm-yy'
+        dateFormat: 'dd-mm-yy',
+        timeFormat: 'hh:mm tt'
       });
-      $('.edd_ld_gift_date').datepicker('setDate', new Date());
+      $('.edd_ld_gift_date').datetimepicker('setDate', new Date());
       $('.edd_form').on('click', '.buy_as_gift_checkbox', function () {
         if ($(this).prop('checked') == true) {
           $('.buy_as_gift_section').show();

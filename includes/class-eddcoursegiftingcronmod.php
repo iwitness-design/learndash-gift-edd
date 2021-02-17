@@ -60,10 +60,10 @@ class EddCourseGiftingCronMod {
 	}
 
 	public function wdm_cron_cchedules( $schedules ) {
-		if ( ! isset( $schedules['wdm_daily_emails_gift_reminder'] ) ) {
-			$schedules['wdm_daily_emails_gift_reminder'] = array(
-				'interval' => 86400,
-				'display' => __( 'Once a day', 'learndash-gift-edd' ),
+		if ( ! isset( $schedules['wdm_emails_gift_reminder'] ) ) {
+			$schedules['wdm_emails_gift_reminder'] = array(
+				'interval' => 1800,
+				'display' => __( 'After 30 min', 'learndash-gift-edd' ),
 			);
 		}
 		if ( ! isset( $schedules['wdm_gift_emails_handler'] ) ) {
@@ -92,10 +92,10 @@ class EddCourseGiftingCronMod {
 				$edd_ld_gift_date = $transaction_data['date'];
 				$customer_email = $transaction_data['email'];
 				$purchaser_user_id = $transaction_data['purchaser_user_id'];
-				$date = DateTime::createFromFormat( 'd-m-Y', $edd_ld_gift_date );
+				$date = DateTime::createFromFormat( 'd-m-Y H:i:s', $edd_ld_gift_date );
 				$edd_ld_gift_dt = $date->getTimestamp();
-				$todays_date = gmdate( 'd-m-Y' );
-				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y', $todays_date );
+				$todays_date = gmdate( 'd-m-Y H:i:s' );
+				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 				$todays_d_timestamp = $todays_date_obj->getTimestamp();
 				if ( $edd_ld_gift_dt <= $todays_d_timestamp ) {
 					$enrolled_c_array = array();

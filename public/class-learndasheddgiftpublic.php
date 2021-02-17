@@ -124,6 +124,7 @@ class LearndashEddGiftPublic {
 	public function enqueue_styles() {
 		if ( edd_is_checkout() ) {
 			wp_enqueue_style( LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME . '-jquery-ui-styles', LEARNDASH_EDD_GIFT_PLUGIN_URL . 'public/assets/css/jquery-ui.css', array(), LEARNDASH_EDD_GIFT_PLUGIN_VERSION );
+			wp_enqueue_style( LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME . '-jquery-ui-styles-time', LEARNDASH_EDD_GIFT_PLUGIN_URL . 'public/assets/css/jquery-ui-timepicker-addon.min.css', array(), LEARNDASH_EDD_GIFT_PLUGIN_VERSION );
 			wp_enqueue_style( LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME . '-styles', LEARNDASH_EDD_GIFT_PLUGIN_URL . 'public/assets/css/public.css', array(), LEARNDASH_EDD_GIFT_PLUGIN_VERSION );
 		}
 	}
@@ -136,6 +137,7 @@ class LearndashEddGiftPublic {
 	public function enqueue_scripts() {
 		if ( edd_is_checkout() ) {
 			wp_enqueue_script( LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME . '-jquery-ui-script', LEARNDASH_EDD_GIFT_PLUGIN_URL . 'public/assets/js/jquery-ui.js', array( 'jquery' ), LEARNDASH_EDD_GIFT_PLUGIN_VERSION );
+			wp_enqueue_script( LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME . '-jquery-ui-script-time', LEARNDASH_EDD_GIFT_PLUGIN_URL . 'public/assets/js/jquery-ui-timepicker-addon.min.js', array( 'jquery' ), LEARNDASH_EDD_GIFT_PLUGIN_VERSION );
 			wp_enqueue_script( LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME . '-script', LEARNDASH_EDD_GIFT_PLUGIN_URL . 'public/assets/js/public.js', array( 'jquery' ), LEARNDASH_EDD_GIFT_PLUGIN_VERSION );
 		}
 	}
