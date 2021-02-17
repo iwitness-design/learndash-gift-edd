@@ -56,19 +56,19 @@ class EddCourseGiftingCronMod {
 	public function __construct() {
 		add_filter( 'cron_schedules', array( $this, 'wdm_cron_cchedules' ) );
 		add_action( 'emails_gift_reminder', array( $this, 'email_gift_reminder' ) );
-		add_action( 'gift_emails_handler', array( $this, 'gift_emails_handler' ) );
+		add_action( 'gift_emails_handler', array( $this, 'gift_email_handler' ) );
 	}
 
 	public function wdm_cron_cchedules( $schedules ) {
 		if ( ! isset( $schedules['wdm_emails_gift_reminder'] ) ) {
 			$schedules['wdm_emails_gift_reminder'] = array(
-				'interval' => 1800,
+				'interval' => 6000,
 				'display' => __( 'After 30 min', 'learndash-gift-edd' ),
 			);
 		}
 		if ( ! isset( $schedules['wdm_gift_emails_handler'] ) ) {
 			$schedules['wdm_gift_emails_handler'] = array(
-				'interval' => 300,
+				'interval' => 6000,
 				'display' => __( 'After 5 min', 'learndash-gift-edd' ),
 			);
 		}
@@ -97,7 +97,8 @@ class EddCourseGiftingCronMod {
 				$todays_date = gmdate( 'd-m-Y H:i:s' );
 				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 				$todays_d_timestamp = $todays_date_obj->getTimestamp();
-				if ( $edd_ld_gift_dt <= $todays_d_timestamp ) {
+				if ( $edd_ld_gift_dt ) {
+					// $edd_ld_gift_dt <= $todays_d_timestamp ^^^
 					$enrolled_c_array = array();
 					$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name );
 					foreach ( $transaction_data['courses'] as $course_id ) {
@@ -120,7 +121,7 @@ class EddCourseGiftingCronMod {
 			update_option( 'buy_as_gift_user_emails_record', $later_emails );
 		}
 	}
-	public function gift_emails_handler() {
+	public function gift_email_handler() {
 		$later_emails = get_option( 'buy_as_gift_user_emails_record' );
 		if ( ! empty( $later_emails ) && is_array( $later_emails ) ) {
 			$email_once_status = false;
@@ -132,8 +133,18 @@ class EddCourseGiftingCronMod {
 					unset( $later_emails[ $transaction_id ] );
 					update_option( 'buy_as_gift_user_emails_record', $later_emails );
 					$email_once_status = true;
+
+					$user_info = [
+						'first_name'    => get_post_meta( $transaction_id, 'edd_ld_gift_first_name', true),
+						'last_name'     => get_post_meta( $transaction_id, 'edd_ld_gift_last_name', true),
+						'email'         => get_post_meta( $transaction_id, 'edd_ld_gift_email', true)
+					];
+					$ck_obj = new EDD_ConvertKit();
+					$yes = $ck_obj->subscribe_email($user_info);
+					update_option( 'sam_worked', $yes );
 				}
 			}
 		}
+		update_option( 'sam_look_here_handler', time() . 'fired!!!!' );
 	}
 }
