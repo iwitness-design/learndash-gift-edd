@@ -140,8 +140,13 @@ class EddCourseGiftingCronMod {
 						'email'         => get_post_meta( $transaction_id, 'edd_ld_gift_email', true)
 					];
 					$ck_obj = new EDD_ConvertKit();
-					$yes = $ck_obj->subscribe_email($user_info);
-					update_option( 'sam_worked', $yes );
+					$response = $ck_obj->subscribe_email($user_info);
+					update_option( 'sam_worked', $response );
+					if ($response) {
+						$payment = new EDD_Payment( $transaction_id );
+						$payment->update_meta( 'convertkit_subscription', true );
+					}
+
 				}
 			}
 		}

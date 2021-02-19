@@ -142,7 +142,7 @@ class EddCourseGiftingEnrollmentMod {
 		if ( ! get_post_meta( $payment_id, 'buy_as_gift_status', true ) ) {
 			return;
 		}
-
+		update_option( 'sam_done', time() . 'we got em' );
 		remove_action( 'edd_complete_download_purchase', array( $edd_convert_kit, 'completed_download_purchase_signup' ), 10 );
 	}
 
