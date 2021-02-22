@@ -36,9 +36,10 @@ class GiftEddLicense {
 	 * @since     1.0.0
 	 */
 	public function __construct() {
-		add_action( 'admin_init', array( $this, 'activate_license' ) );
-		add_action( 'admin_init', array( $this, 'deactivate_license' ) );
+		add_action( 'admin_init', array( $this, 'activate_license' ), 100 );
+		add_action( 'admin_init', array( $this, 'deactivate_license' ), 100 );
 		add_action( 'admin_init', array( $this, 'check_license' ) );
+		add_action( 'admin_init', array( $this, 'register_settings' ), 50 );
 		add_action( 'admin_init', array( $this, 'plugin_updater' ) );
 		add_action( 'admin_notices', array( $this, 'license_admin_notice' ) );
 	}
@@ -65,6 +66,19 @@ class GiftEddLicense {
 		return self::$_prefix;
 	}
 
+	public function register_settings() {
+		register_setting( 'learndash_edd_gift_options', self::$_prefix . '_license_key', array( $this, 'sanitize_license' ) );
+    }
+
+	public function sanitize_license( $new ) {
+		$old = get_option( self::$_prefix . '_license_key' );
+		if ( $old && $old != $new ) {
+			delete_option( self::$_prefix . '_license_key' ); // new license has been entered, so must reactivate
+		}
+
+		return $new;
+	}
+
 	/**
 	 * Return the license key
 	 *
@@ -74,12 +88,12 @@ class GiftEddLicense {
 	public static function get_license_key() {
 		return trim( self::get_option( 'license' ) );
 	}
-
+//    fix
 	public static function get_option( $key, $default = false ) {
 		if ( 'license' === $key ) {
-			$settings = get_option( 'view_limit', [] );
+			$settings = get_option( 'learndash-gift-edd_license_key', [] );
 		} else {
-			$settings = get_option( 'view_limit_settings', [] );
+			$settings = get_option( 'learndash-gift-edd_settings', [] );
 		}
 
 		if ( isset( $settings[ $key ] ) ) {
