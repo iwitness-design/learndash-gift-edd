@@ -14,11 +14,9 @@
  * @copyright 2016 WisdmLabs or Company Name
  */
 
-$license = get_option( 'learndash-gift-edd_license_key', '' );
 $status  = get_option( 'learndash-gift-edd_license_status', '' );
 
 ?>
-
 <div id="wdm-learndash-gift-edd-setting" class="wrap">
     <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
     <form method="post">
@@ -30,14 +28,12 @@ $status  = get_option( 'learndash-gift-edd_license_status', '' );
                 <td>
                     <p>
 					    <?php if ( $status == 'valid' ) : ?>
-                        <input name="action" type="hidden" value="deactivate">
-						    <?php wp_nonce_field( 'learndash-gift-edd_deactivate_license', 'learndash-gift-edd_deactivate_license' ); ?>
 						    <?php submit_button( 'Deactivate License', 'secondary', 'learndash-gift-edd_license_deactivate', false ); ?>
                             <span style="color:green">&nbsp;&nbsp;<?php _e( 'active', 'learndash-gift-edd' ); ?></span>
+						    <?php wp_nonce_field( 'learndash-gift-edd_deactivate_license', 'learndash-gift-edd_deactivate_license' ); ?>
 					    <?php else : ?>
                             <input class="regular-text" type="text" id="learndash-gift-edd_license_key"
                                    name="learndash-gift-edd_license_key" value=""/>
-                            <input type="hidden" name="action" value="activate">
 						    <?php submit_button( 'Activate License', 'secondary', 'learndash-gift-edd_license_activate', false );
 							wp_nonce_field( 'learndash-gift-edd_license_activate', 'learndash-gift-edd_license_activate' );
 					    endif; ?></p>
@@ -49,7 +45,6 @@ $status  = get_option( 'learndash-gift-edd_license_status', '' );
         </table>
     </form>
 	<form method="post" action="options.php">
-
 		<?php settings_fields( 'learndash_edd_gift_options' ); ?>
 		<div class = "wdm-learndash-gift-edd-email-settings">
 			<br>

@@ -53,7 +53,7 @@ class GiftEddLicense {
 	 */
 	public static function get_instance() {
 
-// If the single instance hasn't been set, set it now.
+        // If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;
 		}
@@ -61,13 +61,28 @@ class GiftEddLicense {
 		return self::$instance;
 	}
 
+	/**
+	 * Return the plugin prefix
+	 *
+	 * @return string
+	 *
+	 */
+
 	public static function get_prefix() {
 		return self::$_prefix;
 	}
 
+	/**
+	 * Initialize plugin license key option
+	 */
+
 	public function register_settings() {
 		register_setting( 'learndash_edd_gift_options', self::$_prefix . '_license_key', array( $this, 'sanitize_license' ) );
     }
+
+	/**
+	 * Check if license key needs to be reactivate
+	 */
 
 	public function sanitize_license( $new ) {
 		$old = get_option( self::$_prefix . '_license_key' );
@@ -300,13 +315,11 @@ class GiftEddLicense {
 			$status = $license_data->license;
 
 			update_option( self::$_prefix . '_license_status', $status );
-			update_option( 'sam_license', 'still good' );
 
 			set_transient( self::$_prefix . '_license_check', $license_data->license, DAY_IN_SECONDS );
 
 			if ( $status !== 'valid' ) {
 				delete_option( self::$_prefix . '_license_status' );
-				update_option( 'sam_license', 'we bad' );
 			}
 		}
 
@@ -318,15 +331,15 @@ class GiftEddLicense {
 	public function plugin_updater() {
 		// load our custom updater
 		if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
-			include( view_limit()->get_plugin_dir() . 'includes/updater.php' );
+			include( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'includes/updater.php' );
 		}
 
 		// retrieve our license key from the DB
 		$license_key = $this->get_license_key();
 
 		// setup the updater
-		new \EDD_SL_Plugin_Updater( LGE_STORE_URL, view_limit()->get_plugin_file(), array(
-				'version' => view_limit()->get_version(),    // current version number
+		new \EDD_SL_Plugin_Updater( LGE_STORE_URL, LEARNDASH_EDD_GIFT_PLUGIN_FILEPATH, array(
+				'version' => LEARNDASH_EDD_GIFT_PLUGIN_VERSION,    // current version number
 				'license' => $license_key,     // license key (used get_option above to retrieve from DB)
 				'item_id' => absint( LGE_ITEM_ID ),
 				'author'  => 'Tanner Moushey'  // author of this plugin
