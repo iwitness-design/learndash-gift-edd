@@ -28,7 +28,6 @@ class GiftEddLicense {
 
 	protected static $_prefix = 'learndash-gift-edd';
 
-
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
@@ -86,21 +85,7 @@ class GiftEddLicense {
 	 * @author Tanner Moushey
 	 */
 	public static function get_license_key() {
-		return trim( self::get_option( 'license' ) );
-	}
-//    fix
-	public static function get_option( $key, $default = false ) {
-		if ( 'license' === $key ) {
-			$settings = get_option( 'learndash-gift-edd_license_key', [] );
-		} else {
-			$settings = get_option( 'learndash-gift-edd_settings', [] );
-		}
-
-		if ( isset( $settings[ $key ] ) ) {
-			return $settings[ $key ];
-		}
-
-		return $default;
+		return get_option( self::$_prefix . '_license_key' );
 	}
 
 	/**
@@ -119,17 +104,20 @@ class GiftEddLicense {
 	public function activate_license() {
 
 		// listen for our activate button to be clicked
-		if ( ! isset( $_POST[ self::$_prefix . '_license_activate' ], $_POST[ self::$_prefix . '_nonce' ] ) ) {
+		if ( ! isset( $_POST[ self::$_prefix . '_license_activate' ]) ) {
 			return;
 		}
 
-		// run a quick security check
-		if ( ! check_admin_referer( self::$_prefix . '_nonce', self::$_prefix . '_nonce' ) ) {
+		if ( ! wp_verify_nonce( $_POST[self::$_prefix . '_license_activate'], self::$_prefix . '_license_activate')) {
 			return;
-		} // get out if we didn't click the Activate button
+		}
 
-		// retrieve the license from the database
-		$license = $this->get_license_key();
+		// retrieve the license from form or the database
+        if ( isset( $_POST[self::$_prefix . '_license_key'] ) ) {
+	        $license = $_POST[self::$_prefix . '_license_key'];
+        } else {
+	        $license = $this->get_license_key();
+        }
 
 		// data to send in our API request
 		$api_params = array(
@@ -186,7 +174,7 @@ class GiftEddLicense {
 					case 'missing' :
 					case 'item_name_mismatch' :
 
-						$message = sprintf( __( 'This appears to be an invalid license key for %s.' ), view_limit()->get_plugin_name() );
+						$message = __( 'This appears to be an invalid license.' );
 						break;
 
 					case 'no_activations_left':
@@ -209,7 +197,7 @@ class GiftEddLicense {
 		if ( ! empty( $message ) ) {
 			$base_url = admin_url( 'options-general.php?page=' . LGE_SETTINGS_PAGE );
 			$redirect = add_query_arg( array(
-				'view_limit_activation' => 'false',
+				'edd_ld_gift_activation' => 'false',
 				'message'               => urlencode( $message )
 			), $base_url );
 
@@ -229,14 +217,13 @@ class GiftEddLicense {
 	public function deactivate_license() {
 
 		// listen for our activate button to be clicked
-		if ( ! isset( $_POST[ self::$_prefix . '_license_deactivate' ], $_POST[ self::$_prefix . '_nonce' ] ) ) {
+		if ( ! isset( $_POST[ self::$_prefix . '_license_deactivate' ] ) ) {
 			return;
 		}
 
-		// run a quick security check
-		if ( ! check_admin_referer( self::$_prefix . '_nonce', self::$_prefix . '_nonce' ) ) {
-			return;
-		}
+		if ( ! wp_verify_nonce( $_POST[self::$_prefix . '_deactivate_license'], self::$_prefix . '_deactivate_license')) {
+		    return;
+        }
 
 		// retrieve the license from the database
 		$license = $this->get_license_key();
@@ -313,11 +300,13 @@ class GiftEddLicense {
 			$status = $license_data->license;
 
 			update_option( self::$_prefix . '_license_status', $status );
+			update_option( 'sam_license', 'still good' );
 
 			set_transient( self::$_prefix . '_license_check', $license_data->license, DAY_IN_SECONDS );
 
 			if ( $status !== 'valid' ) {
 				delete_option( self::$_prefix . '_license_status' );
+				update_option( 'sam_license', 'we bad' );
 			}
 		}
 
@@ -350,9 +339,9 @@ class GiftEddLicense {
 	 * This is a means of catching errors from the activation method above and displaying it to the customer
 	 */
 	public function license_admin_notice() {
-		if ( isset( $_GET['view_limit_activation'] ) && ! empty( $_GET['message'] ) ) {
+		if ( isset( $_GET['edd_ld_gift_activation'] ) && ! empty( $_GET['message'] ) ) {
 
-			switch ( $_GET['view_limit_activation'] ) {
+			switch ( $_GET['edd_ld_gift_activation'] ) {
 
 				case 'false':
 					$message = urldecode( $_GET['message'] );

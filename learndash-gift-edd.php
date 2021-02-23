@@ -19,7 +19,7 @@
 
 /* EDD Licensing constants */
 define( 'LGE_STORE_URL', 'https://staging-bloopanimation.kinsta.cloud/' ); //replace with Bloop URL
-define( 'LGE_ITEM_ID', 124336 ); //replace with product ID in EDD at Bloop
+define( 'LGE_ITEM_ID', 124341 ); //replace with product ID in EDD at Bloop
 define( 'LGE_SETTINGS_PAGE', 'learndash-gift-edd' );
 
 /**
