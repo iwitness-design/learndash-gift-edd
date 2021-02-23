@@ -59,6 +59,10 @@ class EddCourseGiftingCronMod {
 		add_action( 'gift_emails_handler', array( $this, 'gift_email_handler' ) );
 	}
 
+	/**
+	 * @TODO adjust the cron schedules before production
+	 */
+
 	public function wdm_cron_cchedules( $schedules ) {
 		if ( ! isset( $schedules['wdm_emails_gift_reminder'] ) ) {
 			$schedules['wdm_emails_gift_reminder'] = array(
@@ -134,6 +138,10 @@ class EddCourseGiftingCronMod {
 					update_option( 'buy_as_gift_user_emails_record', $later_emails );
 					$email_once_status = true;
 
+					/**
+					 * Send Giftee information to Convertkit
+					 */
+
 					$user_info = [
 						'first_name'    => get_post_meta( $transaction_id, 'edd_ld_gift_first_name', true),
 						'last_name'     => get_post_meta( $transaction_id, 'edd_ld_gift_last_name', true),
@@ -141,7 +149,6 @@ class EddCourseGiftingCronMod {
 					];
 					$ck_obj = new EDD_ConvertKit();
 					$response = $ck_obj->subscribe_email($user_info);
-					update_option( 'sam_worked', $response );
 					if ($response) {
 						$payment = new EDD_Payment( $transaction_id );
 						$payment->update_meta( 'convertkit_subscription', true );
@@ -150,6 +157,5 @@ class EddCourseGiftingCronMod {
 				}
 			}
 		}
-		update_option( 'sam_look_here_handler', time() . 'fired!!!!' );
 	}
 }
