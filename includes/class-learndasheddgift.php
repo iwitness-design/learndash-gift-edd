@@ -238,11 +238,7 @@ class LearndashEddGift {
 		if ( ! wp_next_scheduled( 'emails_gift_reminder' ) ) {
 			$date         = gmdate( 'Y-m-d' );
 			$current_time = strtotime( $date . ' 07:00:00' );
-//			if ( $current_time > time() ) {
-				wp_schedule_event( $current_time, 'wdm_emails_gift_reminder', 'emails_gift_reminder' );
-//			} else {
-//				wp_schedule_event( strtotime( '+1 day', $current_time ), 'wdm_emails_gift_reminder', 'emails_gift_reminder' );
-//			}
+			wp_schedule_event( $current_time, 'wdm_emails_gift_reminder', 'emails_gift_reminder' );
 		}
 		if ( ! wp_next_scheduled( 'gift_emails_handler' ) ) {
 			$date = gmdate( 'Y-m-d' );
