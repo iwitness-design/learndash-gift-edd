@@ -233,12 +233,10 @@ class EddCourseGiftingEnrollmentMod {
 	}
 
 	public function current_user_enrollment_status( $transaction_id, $edd_ld_gift_date, $customer_email, $courses, $purchaser_user_id ) {
-		$date = DateTime::createFromFormat( 'd-m-Y H:i:s', $edd_ld_gift_date );
-		$elgd_timestamp = $date->getTimestamp();
-		$todays_date = gmdate( 'd-m-Y' );
-		$todays_date_obj = DateTime::createFromFormat( 'd-m-Y', $todays_date );
+		$todays_date = gmdate( 'd-m-Y H:i:s' );
+		$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 		$td_timestamp = $todays_date_obj->getTimestamp();
-		if ( $elgd_timestamp <= $td_timestamp ) {
+		if ( $edd_ld_gift_date <= $td_timestamp ) {
 			return true;
 		} else {
 			$enrollment_record = get_option( 'buy_as_gift_user_enrollment_track' );

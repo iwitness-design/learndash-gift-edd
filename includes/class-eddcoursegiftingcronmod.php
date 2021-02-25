@@ -59,20 +59,16 @@ class EddCourseGiftingCronMod {
 		add_action( 'gift_emails_handler', array( $this, 'gift_email_handler' ) );
 	}
 
-	/**
-	 * @TODO adjust the cron schedules before production
-	 */
-
 	public function wdm_cron_cchedules( $schedules ) {
 		if ( ! isset( $schedules['wdm_emails_gift_reminder'] ) ) {
 			$schedules['wdm_emails_gift_reminder'] = array(
-				'interval' => 6000,
+				'interval' => 1800,
 				'display' => __( 'After 30 min', 'learndash-gift-edd' ),
 			);
 		}
 		if ( ! isset( $schedules['wdm_gift_emails_handler'] ) ) {
 			$schedules['wdm_gift_emails_handler'] = array(
-				'interval' => 6000,
+				'interval' => 300,
 				'display' => __( 'After 5 min', 'learndash-gift-edd' ),
 			);
 		}
@@ -96,13 +92,10 @@ class EddCourseGiftingCronMod {
 				$edd_ld_gift_date = $transaction_data['date'];
 				$customer_email = $transaction_data['email'];
 				$purchaser_user_id = $transaction_data['purchaser_user_id'];
-				$date = DateTime::createFromFormat( 'd-m-Y H:i:s', $edd_ld_gift_date );
-				$edd_ld_gift_dt = $date->getTimestamp();
 				$todays_date = gmdate( 'd-m-Y H:i:s' );
 				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 				$todays_d_timestamp = $todays_date_obj->getTimestamp();
-				if ( $edd_ld_gift_dt ) {
-					// $edd_ld_gift_dt <= $todays_d_timestamp ^^^
+				if ( $edd_ld_gift_date <= $todays_d_timestamp ) {
 					$enrolled_c_array = array();
 					$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name );
 					foreach ( $transaction_data['courses'] as $course_id ) {
@@ -141,7 +134,6 @@ class EddCourseGiftingCronMod {
 					/**
 					 * Send Giftee information to Convertkit
 					 */
-
 					$user_info = [
 						'first_name'    => get_post_meta( $transaction_id, 'edd_ld_gift_first_name', true),
 						'last_name'     => get_post_meta( $transaction_id, 'edd_ld_gift_last_name', true),
@@ -153,7 +145,6 @@ class EddCourseGiftingCronMod {
 						$payment = new EDD_Payment( $transaction_id );
 						$payment->update_meta( 'convertkit_subscription', true );
 					}
-
 				}
 			}
 		}
