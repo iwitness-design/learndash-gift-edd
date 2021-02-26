@@ -63,13 +63,13 @@ class EddCourseGiftingCronMod {
 		if ( ! isset( $schedules['wdm_emails_gift_reminder'] ) ) {
 			$schedules['wdm_emails_gift_reminder'] = array(
 				'interval' => 1800,
-				'display' => __( 'After 30 min', 'learndash-gift-edd' ),
+				'display' => __( '30 minutes', 'learndash-gift-edd' ),
 			);
 		}
 		if ( ! isset( $schedules['wdm_gift_emails_handler'] ) ) {
 			$schedules['wdm_gift_emails_handler'] = array(
 				'interval' => 300,
-				'display' => __( 'After 5 min', 'learndash-gift-edd' ),
+				'display' => __( '5 minutes', 'learndash-gift-edd' ),
 			);
 		}
 		return $schedules;
