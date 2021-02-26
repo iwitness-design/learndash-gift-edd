@@ -29,6 +29,18 @@ e.g.
 3. Upload the `learndash-gift-edd` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
+= Setting up plugin licensing =
+
+1. Navigate to Settings >> Learndash Gift Courses.
+2. Place the license key in the field labeled "License Key".
+3. Select the "Activate License" button, and a valid license key will show an active status.
+4. To deactivate the license and enter a new license, select the "Deactivate License" button.
+
+= Setting up plugin update functionality through EDD =
+
+1. Set the LGE_STORE_URL constant in `learndash-gift-edd/learndash-gift-edd.php` to the hosting site URL.
+2. Set the LGE_ITEM_ID constant in `learndash-gift-edd/learndash-gift-edd.php` to the Product Id of the plugin on the hosting site.
+
 == Changelog ==
 
 = 1.1.1 =

@@ -110,6 +110,16 @@ class LearndashEddGift {
 
 	protected static $genm_module_instance = null;
 
+	/**
+	 * Instance of "GiftEddLicense" class.
+	 *
+	 * @since    1.0.0
+	 *
+	 * @var      object
+	 */
+
+	protected static $gel_module_instance = null;
+
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
@@ -191,6 +201,12 @@ class LearndashEddGift {
 			include_once( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'includes/class-eddcoursegiftingenrollmentmod.php' );
 			include_once( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'includes/class-eddcoursegiftingcronmod.php' );
 			include_once( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'includes/class-gifteddemailnotificationmod.php' );
+
+			/*--------------------------------------------------------------------*
+			 * Licensing functionality
+			 *---------------------------------------------------------------------*/
+
+			include_once( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'includes/class-eddlicense.php' );
 		}
 	}
 
@@ -214,6 +230,9 @@ class LearndashEddGift {
 		}
 		if ( class_exists( 'GiftEddEmailNotificationMod' ) ) {
 			self::$genm_module_instance = GiftEddEmailNotificationMod::get_instance();
+		}
+		if ( class_exists( 'GiftEddLicense' ) ) {
+			self::$gel_module_instance = GiftEddLicense::get_instance();
 		}
 	}
 
