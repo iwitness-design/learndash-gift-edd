@@ -56,20 +56,20 @@ class EddCourseGiftingCronMod {
 	public function __construct() {
 		add_filter( 'cron_schedules', array( $this, 'wdm_cron_cchedules' ) );
 		add_action( 'emails_gift_reminder', array( $this, 'email_gift_reminder' ) );
-		add_action( 'gift_emails_handler', array( $this, 'gift_emails_handler' ) );
+		add_action( 'gift_emails_handler', array( $this, 'gift_email_handler' ) );
 	}
 
 	public function wdm_cron_cchedules( $schedules ) {
-		if ( ! isset( $schedules['wdm_daily_emails_gift_reminder'] ) ) {
-			$schedules['wdm_daily_emails_gift_reminder'] = array(
-				'interval' => 86400,
-				'display' => __( 'Once a day', 'learndash-gift-edd' ),
+		if ( ! isset( $schedules['wdm_emails_gift_reminder'] ) ) {
+			$schedules['wdm_emails_gift_reminder'] = array(
+				'interval' => 1800,
+				'display' => __( '30 minutes', 'learndash-gift-edd' ),
 			);
 		}
 		if ( ! isset( $schedules['wdm_gift_emails_handler'] ) ) {
 			$schedules['wdm_gift_emails_handler'] = array(
 				'interval' => 300,
-				'display' => __( 'After 5 min', 'learndash-gift-edd' ),
+				'display' => __( '5 minutes', 'learndash-gift-edd' ),
 			);
 		}
 		return $schedules;
@@ -92,12 +92,14 @@ class EddCourseGiftingCronMod {
 				$edd_ld_gift_date = $transaction_data['date'];
 				$customer_email = $transaction_data['email'];
 				$purchaser_user_id = $transaction_data['purchaser_user_id'];
-				$date = DateTime::createFromFormat( 'd-m-Y', $edd_ld_gift_date );
-				$edd_ld_gift_dt = $date->getTimestamp();
-				$todays_date = gmdate( 'd-m-Y' );
-				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y', $todays_date );
+				if ( strpos( $edd_ld_gift_date, '-') ) {
+					$date = DateTime::createFromFormat( 'd-m-Y', $edd_ld_gift_date );
+					$edd_ld_gift_date = $date->getTimestamp();
+				}
+				$todays_date = gmdate( 'd-m-Y H:i:s' );
+				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 				$todays_d_timestamp = $todays_date_obj->getTimestamp();
-				if ( $edd_ld_gift_dt <= $todays_d_timestamp ) {
+				if ( $edd_ld_gift_date <= $todays_d_timestamp ) {
 					$enrolled_c_array = array();
 					$customer_id = get_gift_receiver_user_id( $customer_email, $customer_first_name, $customer_last_name );
 					foreach ( $transaction_data['courses'] as $course_id ) {
@@ -120,7 +122,7 @@ class EddCourseGiftingCronMod {
 			update_option( 'buy_as_gift_user_emails_record', $later_emails );
 		}
 	}
-	public function gift_emails_handler() {
+	public function gift_email_handler() {
 		$later_emails = get_option( 'buy_as_gift_user_emails_record' );
 		if ( ! empty( $later_emails ) && is_array( $later_emails ) ) {
 			$email_once_status = false;
@@ -132,6 +134,21 @@ class EddCourseGiftingCronMod {
 					unset( $later_emails[ $transaction_id ] );
 					update_option( 'buy_as_gift_user_emails_record', $later_emails );
 					$email_once_status = true;
+
+					/**
+					 * Send Giftee information to Convertkit
+					 */
+					$user_info = [
+						'first_name'    => get_post_meta( $transaction_id, 'edd_ld_gift_first_name', true),
+						'last_name'     => get_post_meta( $transaction_id, 'edd_ld_gift_last_name', true),
+						'email'         => get_post_meta( $transaction_id, 'edd_ld_gift_email', true)
+					];
+					$ck_obj = new EDD_ConvertKit();
+					$response = $ck_obj->subscribe_email($user_info);
+					if ($response) {
+						$payment = new EDD_Payment( $transaction_id );
+						$payment->update_meta( 'convertkit_subscription', true );
+					}
 				}
 			}
 		}

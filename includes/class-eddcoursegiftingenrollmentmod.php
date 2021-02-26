@@ -142,7 +142,6 @@ class EddCourseGiftingEnrollmentMod {
 		if ( ! get_post_meta( $payment_id, 'buy_as_gift_status', true ) ) {
 			return;
 		}
-
 		remove_action( 'edd_complete_download_purchase', array( $edd_convert_kit, 'completed_download_purchase_signup' ), 10 );
 	}
 
@@ -234,12 +233,10 @@ class EddCourseGiftingEnrollmentMod {
 	}
 
 	public function current_user_enrollment_status( $transaction_id, $edd_ld_gift_date, $customer_email, $courses, $purchaser_user_id ) {
-		$date = DateTime::createFromFormat( 'd-m-Y', $edd_ld_gift_date );
-		$elgd_timestamp = $date->getTimestamp();
-		$todays_date = gmdate( 'd-m-Y' );
-		$todays_date_obj = DateTime::createFromFormat( 'd-m-Y', $todays_date );
+		$todays_date = gmdate( 'd-m-Y H:i:s' );
+		$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 		$td_timestamp = $todays_date_obj->getTimestamp();
-		if ( $elgd_timestamp <= $td_timestamp ) {
+		if ( $edd_ld_gift_date <= $td_timestamp ) {
 			return true;
 		} else {
 			$enrollment_record = get_option( 'buy_as_gift_user_enrollment_track' );
