@@ -29,7 +29,7 @@ $status  = get_option( 'learndash-gift-edd_license_status', '' );
                     <p>
 					    <?php if ( $status == 'valid' ) : ?>
 						    <?php submit_button( 'Deactivate License', 'secondary', 'learndash-gift-edd_license_deactivate', false ); ?>
-                            <span style="color:green">&nbsp;&nbsp;<?php _e( 'active', 'learndash-gift-edd' ); ?></span>
+                            <span style="color:green; padding-left: .5rem;"><?php _e( 'active', 'learndash-gift-edd' ); ?></span>
 						    <?php wp_nonce_field( 'learndash-gift-edd_deactivate_license', 'learndash-gift-edd_deactivate_license' ); ?>
 					    <?php else : ?>
                             <input class="regular-text" type="text" id="learndash-gift-edd_license_key"

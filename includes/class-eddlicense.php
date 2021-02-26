@@ -137,7 +137,7 @@ class GiftEddLicense {
 		// data to send in our API request
 		$api_params = array(
 			'edd_action' => 'activate_license',
-			'license'    => $license,
+			'license'    => wp_strip_all_tags($license),
 			'item_id'    => absint( LGE_ITEM_ID ),
 			'url'        => home_url()
 		);
