@@ -92,6 +92,10 @@ class EddCourseGiftingCronMod {
 				$edd_ld_gift_date = $transaction_data['date'];
 				$customer_email = $transaction_data['email'];
 				$purchaser_user_id = $transaction_data['purchaser_user_id'];
+				if ( strpos( $edd_ld_gift_date, '-') ) {
+					$date = DateTime::createFromFormat( 'd-m-Y', $edd_ld_gift_date );
+					$edd_ld_gift_date = $date->getTimestamp();
+				}
 				$todays_date = gmdate( 'd-m-Y H:i:s' );
 				$todays_date_obj = DateTime::createFromFormat( 'd-m-Y H:i:s', $todays_date );
 				$todays_d_timestamp = $todays_date_obj->getTimestamp();
