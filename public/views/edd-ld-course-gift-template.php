@@ -56,7 +56,6 @@
 					</label>
 					<span class="edd-description" id="edd-ld-gift-date-description"><?php esc_html_e( 'On selected date the user will be enrolled in the purchased course', 'learndash-gift-edd' ); ?></span>
 					<input class="edd-input edd_ld_gift_date required" type="text" name="edd_ld_gift_date" placeholder="<?php esc_html_e( 'Select date', 'learndash-gift-edd' ); ?>" id="edd-ld-gift-date" value="" aria-describedby="edd-email-description" autocomplete="off" required readonly/>
-                    <input type="hidden" id="edd_ld_gift_timestamp_holder" name="edd_ld_gift_timestamp" value="">
                     <input type="hidden" id="edd_ld_gift_timestamp" name="edd_ld_gift_timestamp" value="">
 				</p>
 				<input type="hidden" name="send_later_status" value = "true">

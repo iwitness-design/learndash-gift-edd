@@ -118,7 +118,8 @@ class EddCourseGiftingCheckoutMod {
 			update_post_meta( $payment_id, 'edd_ld_gift_last_name', $last_name );
 			if ( isset( $_POST['send_later_status'] ) && $_POST['send_later_status'] ) {
 				update_post_meta( $payment_id, 'send_later_status', true );
-				update_post_meta( $payment_id, 'edd_ld_gift_date', wp_strip_all_tags($_POST['edd_ld_gift_timestamp']));
+				$time = new DateTime( wp_strip_all_tags( $_POST['edd_ld_gift_timestamp'] ) );
+				update_post_meta( $payment_id, 'edd_ld_gift_date', $time->getTimestamp());
 			}
 		}
 	}
