@@ -73,7 +73,7 @@ class EddCourseGiftingCheckoutMod {
 			$settings = get_plugin_setting_data();
 			$gift_label = ! empty( $settings['buy_as_gift_label'] ) ? $settings['buy_as_gift_label'] : __( 'Buy as a gift', 'learndash-gift-edd' );
 			$send_later_status = ( ! empty( $settings['enable_send_later'] ) && 'checked' == $settings['enable_send_later'] ) ? true : false;
-			include_once( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'public/views/edd-ld-course-gift-template.php' );
+			include( LEARNDASH_EDD_GIFT_PLUGIN_PATH . 'public/views/edd-ld-course-gift-template.php' );
 		}
 	}
 	/**
