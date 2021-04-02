@@ -139,9 +139,6 @@ class LearndashEddGift {
 	 * Define constants
 	 *--------------------------------------------------------------------*/
 	private function define_constants() {
-		if ( ! defined( 'LEARNDASH_EDD_GIFT_PLUGIN_VERSION' ) ) {
-			define( 'LEARNDASH_EDD_GIFT_PLUGIN_VERSION', '1.0.0' );
-		}
 		if ( ! defined( 'LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME' ) ) {
 			define( 'LEARNDASH_EDD_GIFT_PUBLIC_HANDLE_NAME', 'learndash-gift-edd-public-handler' );
 		}

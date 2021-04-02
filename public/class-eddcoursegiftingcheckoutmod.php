@@ -116,7 +116,7 @@ class EddCourseGiftingCheckoutMod {
 			update_post_meta( $payment_id, 'edd_ld_gift_message', $message );
 			update_post_meta( $payment_id, 'edd_ld_gift_first_name', $first_name );
 			update_post_meta( $payment_id, 'edd_ld_gift_last_name', $last_name );
-			if ( isset( $_POST['send_later_status'] ) && $_POST['send_later_status'] ) {
+			if ( isset( $_POST['send_later_status'], $_POST['edd_ld_send_toggle'] ) && $_POST['send_later_status'] && $_POST['edd_ld_send_toggle'] === 'future' ) {
 				update_post_meta( $payment_id, 'send_later_status', true );
 				$time = new DateTime( wp_strip_all_tags( $_POST['edd_ld_gift_timestamp'] ) );
 				update_post_meta( $payment_id, 'edd_ld_gift_date', $time->getTimestamp());

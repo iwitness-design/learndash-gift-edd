@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       Gift LearnDash Courses
  * Description:       Gift LearnDash courses using EDD platform. Required LearnDash, EDD, and LearnDash EDD Integration.
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            Bloop Animation Studios
  * Text Domain:       learndash-gift-edd
  * License:           GPL-2.0+
@@ -21,6 +21,7 @@
 define( 'LGE_STORE_URL', 'https://staging-bloopanimation.kinsta.cloud/' ); //replace with Bloop URL
 define( 'LGE_ITEM_ID', 124341 ); //replace with product ID in EDD at Bloop
 define( 'LGE_SETTINGS_PAGE', 'learndash-gift-edd' );
+define( 'LEARNDASH_EDD_GIFT_PLUGIN_VERSION', get_plugin_data( __FILE__ )['Version'] );
 
 /**
  *If this file is called directly, abort.

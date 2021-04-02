@@ -12,14 +12,15 @@
  * @link      https://wisdmlabs.com
  * @copyright 2016 WisdmLabs or Company Name
  */
-
 ?>
 
 <fieldset id = "edd_checkout_buy_as_gift_info">
 	<div class = "buy_as_gift_checkbox_div">
 		<p>
-			<input type = "checkbox" class="buy_as_gift_checkbox" name = "buy_as_gift_checkbox" value = "on" style="cursor:pointer;" title="Enable to purchase as a gift">
-			<label class="wdm_label buy_as_gift_checkbox_label textinput"><?php echo wp_kses_post( apply_filters( 'edd_ld_buy_as_gift_info_text', $gift_label ) ); ?></label>
+			<label class="wdm_label buy_as_gift_checkbox_label textinput">
+				<input type = "checkbox" class="buy_as_gift_checkbox" name = "buy_as_gift_checkbox" value = "on" style="cursor:pointer;" title="Enable to purchase as a gift">
+				<?php echo wp_kses_post( apply_filters( 'edd_ld_buy_as_gift_info_text', $gift_label ) ); ?>
+			</label>
 		</p>
 	</div>
 	<div class = "buy_as_gift_section" style="display:none">
@@ -50,6 +51,10 @@
 			if ( $send_later_status ) {
 				?>
 				<p>
+					<label><input type="radio" name="edd_ld_send_toggle" value="now" checked="checked"/> Send Immediately</label>
+					<label><input type="radio" name="edd_ld_send_toggle" value="future" /> Send on Date</label>
+				</p>
+				<p class="edd-ld-gift-date-cont" style="display: none;">
 					<label class="edd-label" for="edd-ld-gift-date">
 						<?php esc_html_e( 'Select the date', 'learndash-gift-edd' ); ?>
 							<span class="edd-required-indicator">*</span>
