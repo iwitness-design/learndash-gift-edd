@@ -134,6 +134,8 @@ class GiftEddLicense {
 	        $license = $this->get_license_key();
         }
 
+        update_option( self::$_prefix . '_license_key', sanitize_text_field( $license ) );
+
 		// data to send in our API request
 		$api_params = array(
 			'edd_action' => 'activate_license',

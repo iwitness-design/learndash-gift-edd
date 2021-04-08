@@ -15,7 +15,7 @@
  */
 
 $status  = get_option( 'learndash-gift-edd_license_status', '' );
-
+$key = get_option( 'learndash-gift-edd_license_key', '' );
 ?>
 <div id="wdm-learndash-gift-edd-setting" class="wrap">
     <h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
@@ -33,7 +33,7 @@ $status  = get_option( 'learndash-gift-edd_license_status', '' );
 						    <?php wp_nonce_field( 'learndash-gift-edd_deactivate_license', 'learndash-gift-edd_deactivate_license' ); ?>
 					    <?php else : ?>
                             <input class="regular-text" type="text" id="learndash-gift-edd_license_key"
-                                   name="learndash-gift-edd_license_key" value=""/>
+                                   name="learndash-gift-edd_license_key" value="<?php echo esc_attr( $key ); ?>"/>
 						    <?php submit_button( 'Activate License', 'secondary', 'learndash-gift-edd_license_activate', false );
 							wp_nonce_field( 'learndash-gift-edd_license_activate', 'learndash-gift-edd_license_activate' );
 					    endif; ?></p>
